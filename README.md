@@ -76,6 +76,6 @@ Code:  [KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/K
 
 ---
 
-## 6. Tổng hợp Code
+## 6. Ôn tập 
 
-Tổng hợp toàn bộ code ASM & C:  [Overview](https://github.com/giunzz/COOA_LABS/tree/main/Overview)
+Ôn tập code ASM & C:  [Overview](https://github.com/giunzz/COOA_LABS/tree/main/Overview)

@@ -16,6 +16,8 @@
   - UART: **P3.0, P3.1**
   - Ngắt ngoài: **INT0 (P3.2), INT1 (P3.3)**
 
+- Hoàng Ngọc Dung
+
 ---
 
 ## 2. Báo cáo từng tuần
@@ -43,10 +45,12 @@
 ### Tuần 5 – C  
 - Lập trình LED 7 đoạn  
 
+- Timer/Counter
+
 - View: [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx)
 
 ### Tuần 6 – C  
-- Timer/Counter, UART  
+-  UART  
 
 - View:  [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx)
 

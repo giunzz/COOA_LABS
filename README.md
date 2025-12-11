@@ -22,39 +22,15 @@
 
 ## 2. Báo cáo từng tuần
 
-### Tuần 1 – ASM  
-- Tổng quan 8051, tập lệnh ASM  
+| Tuần | Nội dung chính | File báo cáo |
+|------|----------------|--------------|
+| **Tuần 1 – ASM** | Tổng quan 8051, tập lệnh ASM | [Report01](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN1.docx) |
+| **Tuần 2 – ASM** | Nhập xuất GPIO, Timer – Counter | [Report02](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN2.docx) |
+| **Tuần 3 – ASM** | Ngắt (Interrupt) | [Report03](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN3.docx) |
+| **Tuần 4 – C** | Lập trình GPIO với C | [Report04](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN4.docx) |
+| **Tuần 5 – C** | LED 7 đoạn, Timer/Counter | [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx) |
+| **Tuần 6 – C** | UART – Timer/Counter nâng cao | [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx) |
 
-- View:  [Report01](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN1.docx)
-
-### Tuần 2 – ASM  
-- Nhập xuất GPIO, Timer – Counter 
-
-- View:  [Report02](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN2.docx)
-
-### Tuần 3 – ASM  
-- Ngắt (Interrupt)  
-
-- View: [Report03](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN3.docx)
-
-### Tuần 4 – C  
-- Lập trình GPIO bằng ngôn ngữ C  
-
-- View: [Report04](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN4.docx)
-
-### Tuần 5 – C  
-- Lập trình LED 7 đoạn  
-
-- Timer/Counter
-
-- View: [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx)
-
-### Tuần 6 – C  
--  UART  
-
-- View:  [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx)
-
----
 
 ## 3. Kiểm tra ASM
 

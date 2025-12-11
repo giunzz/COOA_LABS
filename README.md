@@ -22,27 +22,33 @@
 
 ### Tuần 1 – ASM  
 - Tổng quan 8051, tập lệnh ASM  
-  [Report01](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN1.docx)
+
+- View:  [Report01](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN1.docx)
 
 ### Tuần 2 – ASM  
-- Nhập xuất GPIO, Timer – Counter  
-  [Report02](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN2.docx)
+- Nhập xuất GPIO, Timer – Counter 
+
+- View:  [Report02](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN2.docx)
 
 ### Tuần 3 – ASM  
 - Ngắt (Interrupt)  
-  [Report03](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN3.docx)
+
+- View: [Report03](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN3.docx)
 
 ### Tuần 4 – C  
 - Lập trình GPIO bằng ngôn ngữ C  
-  [Report04](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN4.docx)
+
+- View: [Report04](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN4.docx)
 
 ### Tuần 5 – C  
 - Lập trình LED 7 đoạn  
-  [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx)
+
+- View: [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx)
 
 ### Tuần 6 – C  
 - Timer/Counter, UART  
-  [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx)
+
+- View:  [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx)
 
 ---
 
@@ -56,8 +62,7 @@
 4. Nút C: LED sáng hết và đứng im. Nút D: chạy lại chế độ 1.  
 5. LED 7 đoạn hiển thị số LED sáng và tốc độ hiện tại.
 
-Code ASM kiểm tra:  
-[Midterm ASM](https://github.com/giunzz/COOA_LABS/tree/main/midterm_asm)
+Code ASM kiểm tra:  [Midterm ASM](https://github.com/giunzz/COOA_LABS/tree/main/midterm_asm)
 
 ---
 
@@ -74,8 +79,7 @@ Code ASM kiểm tra:
   - mode 1/2/3: chạy từng chế độ riêng  
 - LED 7 đoạn hiển thị mode và số LED sáng  
 
-Code:  
-[KT C – Lần 1](https://github.com/giunzz/COOA_LABS/blob/main/code_c/kt2.c)
+Code:  [KT C – Lần 1](https://github.com/giunzz/COOA_LABS/blob/main/code_c/kt2.c)
 
 ---
 
@@ -88,12 +92,10 @@ Code:
 - Button 2: T = T + 0.5 (giới hạn 0.5 → 2.0s)  
 - LED 7 đoạn hiển thị T (ms)
 
-Code:  
-[KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT3.c)
+Code:  [KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT3.c)
 
 ---
 
 ## 6. Tổng hợp Code
 
-Tổng hợp toàn bộ code ASM & C:  
-[Overview](https://github.com/giunzz/COOA_LABS/tree/main/Overview)
+Tổng hợp toàn bộ code ASM & C:  [Overview](https://github.com/giunzz/COOA_LABS/tree/main/Overview)

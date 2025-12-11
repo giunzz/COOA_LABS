@@ -1,0 +1,118 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/19/2025 01:47:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0030                 1     BASE    DATA 30H
+  0031                 2     MASK    DATA 31H
+                       3     
+0000                   4     ORG 0000H
+                       5     
+0000                   6     START:
+0000 7530FF            7         MOV BASE, #0FFH
+0003 7531FF            8         MOV MASK, #0FFH
+                       9     
+0006                  10     MAIN_LOOP:
+                      11     
+0006 7E00             12         MOV R6, #0                 
+                      13     
+0008                  14     FOR_I:
+0008 BE0809           15         CJNE R6,#8, OK_I
+000B E531             16         MOV A, MASK
+000D F5A0             17         MOV P2, A
+000F 120041           18         LCALL DELAY200MS
+0012 80EC             19         SJMP START
+0014                  20     OK_I:
+                      21         
+                      22             ; base >>= 1
+0014 E530             23         MOV A, BASE
+0016 03               24         RR A
+0017 F530             25         MOV BASE, A
+                      26     
+                      27         ; j = 0
+0019 7F00             28         MOV R7, #0
+                      29     
+001B                  30     FOR_J:
+                      31         ; j < 8 - i ?
+001B EF               32         MOV A, R7
+001C 2E               33         ADD A, R6
+001D B40802           34         CJNE A, #8, OK_J
+0020 8019             35         SJMP END_J
+0022                  36     OK_J:
+                      37         ; (1 << j)
+0022 7401             38         MOV A, #1
+0024 8FF0             39         MOV B, R7
+0026                  40     SHIFT_J:
+0026 6004             41         JZ SHIFT_DONE
+0028 23               42         RL A
+0029 D5F0FA           43         DJNZ B, SHIFT_J
+002C                  44     SHIFT_DONE:
+                      45     
+002C F4               46         CPL A             
+002D F5F0             47         MOV B, A
+                      48     
+002F E531             49         MOV A, MASK       
+0031 55F0             50         ANL A, B
+0033 F5A0             51         MOV P2, A         
+                      52     
+0035 120041           53         LCALL DELAY200MS
+                      54     
+0038 0F               55         INC R7
+0039 80E0             56         SJMP FOR_J
+                      57     
+A51 MACRO ASSEMBLER  MAIN                                                                 11/19/2025 01:47:58 PAGE     2
+
+003B                  58     END_J:
+003B 853031           59         MOV MASK, BASE     ; mask = base
+003E 0E               60         INC R6
+003F 80C7             61         SJMP FOR_I
+                      62     
+                      63     
+0041                  64     DELAY200MS:
+0041 7AC8             65         MOV R2, #200
+0043                  66     D2:
+0043 79C8             67         MOV R1, #200
+0045                  68     D1:
+0045 00               69         NOP
+0046 00               70         NOP
+0047 00               71         NOP
+0048 D9FB             72         DJNZ R1, D1
+004A DAF7             73         DJNZ R2, D2
+004C 22               74         RET
+                      75     
+                      76     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/19/2025 01:47:58 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+BASE . . . . . . .  D ADDR   0030H   A   
+D1 . . . . . . . .  C ADDR   0045H   A   
+D2 . . . . . . . .  C ADDR   0043H   A   
+DELAY200MS . . . .  C ADDR   0041H   A   
+END_J. . . . . . .  C ADDR   003BH   A   
+FOR_I. . . . . . .  C ADDR   0008H   A   
+FOR_J. . . . . . .  C ADDR   001BH   A   
+MAIN_LOOP. . . . .  C ADDR   0006H   A   
+MASK . . . . . . .  D ADDR   0031H   A   
+OK_I . . . . . . .  C ADDR   0014H   A   
+OK_J . . . . . . .  C ADDR   0022H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SHIFT_DONE . . . .  C ADDR   002CH   A   
+SHIFT_J. . . . . .  C ADDR   0026H   A   
+START. . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

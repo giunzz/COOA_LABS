@@ -1,0 +1,3 @@
+".\Objects\main.obj" 
+TO ".\Objects\kt_asm" 
+PRINT(".\Listings\kt_asm.m51") RAMSIZE(256) 

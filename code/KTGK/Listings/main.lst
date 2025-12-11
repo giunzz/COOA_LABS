@@ -1,0 +1,153 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/11/2025 16:26:02 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          #define SEGMENT_PORT P0  
+   4          #define SELECT_PORT  P2  
+   5          sbit LED1 = P1^0;
+   6          
+   7          volatile unsigned int period1 = 100;   
+   8          volatile unsigned int period2 = 1000;   
+   9          unsigned int c1 = 0;
+  10          unsigned int val;
+  11          
+  12          void small_delay()
+  13          {
+  14   1          unsigned int i;
+  15   1          for(i = 0; i < 200; i++);
+  16   1      }
+  17          void delay_ms(unsigned int ms) {
+  18   1          unsigned int i, j;
+  19   1          for (i = 0; i < ms; i++)
+  20   1              for (j = 0; j < 123; j++);
+  21   1      }
+  22          void timer0_isr(void) interrupt 1
+  23          {
+  24   1          TH0 = 0xFC;
+  25   1          TL0 = 0x66;   // 1ms tick
+  26   1          c1++;
+  27   1      }
+  28          
+  29          void timer0_init()
+  30          {
+  31   1          TMOD |= 0x01;  // Mode 1
+  32   1          TH0 = 0xFC; TL0 = 0x66;
+  33   1          ET0 = 1;
+  34   1          TR0 = 1;
+  35   1      }
+  36          unsigned char digit_patterns[] = {
+  37              0x3F,   // 0
+  38              0x06,   // 1
+  39              0x5B,   // 2
+  40              0x4F,   // 3
+  41              0x66,   // 4
+  42              0x6D,   // 5
+  43              0x7D,   // 6
+  44              0x07,   // 7
+  45              0x7F,   // 8
+  46              0x6F    // 9
+  47          };
+  48          void display_digit(unsigned char index, unsigned char value, unsigned char dot)
+  49          {
+  50   1          if (dot == 0){
+  51   2            SELECT_PORT = (index << 2);
+  52   2            SEGMENT_PORT = digit_patterns[value];
+  53   2            delay_ms(1);
+  54   2          }
+C51 COMPILER V9.60.0.0   MAIN                                                              12/11/2025 16:26:02 PAGE 2   
+
+  55   1          else 
+  56   1          {
+  57   2            SELECT_PORT = (index << 2);
+  58   2            SEGMENT_PORT = digit_patterns[value] | 0x80;
+  59   2            delay_ms(1);
+  60   2          }
+  61   1            
+  62   1      }
+  63          
+  64          void display4_digit(unsigned char val)
+  65          {
+  66   1          val = period2;
+  67   1          SELECT_PORT = (0 << 2);
+  68   1          SEGMENT_PORT = digit_patterns[val%10];
+  69   1          delay_ms(2);
+  70   1          val = val/10;
+  71   1          SELECT_PORT = (1 << 2);
+  72   1          SEGMENT_PORT = digit_patterns[val%10];
+  73   1          delay_ms(2);
+  74   1          val = val/10;
+  75   1          SELECT_PORT = (2 << 2);
+  76   1          SEGMENT_PORT = digit_patterns[val%10];
+  77   1          delay_ms(2);
+  78   1          val = val/10;
+  79   1          SELECT_PORT = (1 << 2);
+  80   1          SEGMENT_PORT = digit_patterns[val];
+  81   1          delay_ms(2);
+  82   1      }
+  83          void external0_isr(void) interrupt 0
+  84          {
+  85   1          val = period2;
+  86   1          display4_digit(val);
+  87   1          LED1 = 0;
+  88   1          delay_ms(period2);
+  89   1      }
+  90          
+  91          void external1_isr(void) interrupt 2
+  92          {
+  93   1          period2 += 500;
+  94   1          if(period2 > 2000) period2 = 500;
+  95   1      }
+  96          
+  97          void main()
+  98          {
+  99   1          LED1 = 1;
+ 100   1          IT0 = 1;  
+ 101   1          IT1 = 1;   
+ 102   1          EX0 = 1;   
+ 103   1          EX1 = 1;   
+ 104   1          EA  = 1;   
+ 105   1          timer0_init(); 
+ 106   1          while(1)
+ 107   1          {
+ 108   2              small_delay();
+ 109   2              c1++;
+ 110   2              // LED1
+ 111   2              if(c1 >= period1)
+ 112   2              {
+ 113   3                  LED1 = !LED1;
+ 114   3                  c1 = 0;
+ 115   3              }
+ 116   2              val = period2;
+C51 COMPILER V9.60.0.0   MAIN                                                              12/11/2025 16:26:02 PAGE 3   
+
+ 117   2              display_digit(0,val%10,0);
+ 118   2              val = val/10;
+ 119   2              display_digit(1,val%10,0);
+ 120   2              val = val / 10;
+ 121   2              display_digit(2,val %10,0);
+ 122   2              val = val / 10;
+ 123   2              display_digit(3,val,0);
+ 124   2          }
+ 125   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    462    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

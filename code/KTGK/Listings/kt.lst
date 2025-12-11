@@ -1,0 +1,151 @@
+A51 MACRO ASSEMBLER  KT                                                                   12/06/2025 12:19:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\kt.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE kt.asm SET(SMALL) DEBUG PRINT(.\Listings\kt.lst) OBJECT(.\Objects\kt.ob
+                      j) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0080                 1     SEGMENT_PORT EQU P0
+  0030                 2     VALUE        DATA 30H
+  0020                 3     FLAG_STOP    BIT 20H
+  0032                 4     T_DELAY      DATA 32H
+                       5     
+0000                   6     ORG 0000H
+0000 020006            7         LJMP MAIN
+                       8     
+0003                   9     ORG 0003H
+0003                  10     INT0_ISR:
+0003 D220             11         SETB FLAG_STOP
+0005 32               12         RETI
+                      13     
+0006                  14     MAIN:
+0006 D288             15         SETB IT0
+0008 D2A8             16         SETB EX0
+000A D2AF             17         SETB EA
+                      18     
+000C D2B0             19         SETB P3.0
+000E D2B3             20         SETB P3.3
+0010 D2B1             21             SETB P3.1
+                      22     
+0012 C220             23         CLR FLAG_STOP
+0014 7800             24         MOV R0, #00H
+0016 753264           25         MOV T_DELAY, #100
+                      26     
+0019                  27     TATDAN_LOOP:
+0019 30B006           28         JNB P3.0, DEC_T
+001C 30B310           29         JNB P3.3, INC_T
+001F 202031           30         JB FLAG_STOP, BNT_C
+                      31     
+0022                  32     DEC_T:
+0022 E532             33         MOV A, T_DELAY
+0024 9432             34         SUBB A, #50
+0026 4004             35         JC LIMIT_T
+0028 F532             36         MOV T_DELAY, A
+002A 800E             37         SJMP SKIP_T
+                      38     
+002C                  39     LIMIT_T:
+002C 753232           40         MOV T_DELAY, #50
+                      41     
+002F                  42     INC_T:
+002F E532             43         MOV A, T_DELAY
+0031 2432             44         ADD A, #50
+0033 B4C802           45         CJNE A, #200, LIMIT2
+0036 74C8             46         MOV A, #200
+0038                  47     LIMIT2:
+0038 F532             48         MOV T_DELAY, A
+                      49     
+003A                  50     SKIP_T:
+003A 88A0             51         MOV P2, R0
+003C D2A4             52         SETB P2.4
+003E D2A5             53         SETB P2.5
+0040 D2A6             54         SETB P2.6
+0042 D2A7             55         SETB P2.7
+                      56     
+0044 120072           57         LCALL DELAY_VARIABLE
+A51 MACRO ASSEMBLER  KT                                                                   12/06/2025 12:19:26 PAGE     2
+
+                      58     
+0047 E8               59         MOV A, R0
+0048 23               60         RL A
+0049 4401             61         ORL A, #01H
+004B F8               62         MOV R0, A
+                      63     
+004C B81FCA           64         CJNE R0, #01FH, TATDAN_LOOP
+004F 7800             65         MOV R0, #00H
+0051 80C6             66         SJMP TATDAN_LOOP
+                      67     
+0053                  68     BNT_C:
+0053 75A000           69         MOV P2, #00H
+0056 D2A4             70         SETB P2.4
+0058 D2A5             71         SETB P2.5
+005A D2A6             72         SETB P2.6
+005C D2A7             73         SETB P2.7
+005E                  74     CHECK_C:
+005E 30B102           75         JNB P3.1, BNT_D
+0061 80FB             76         SJMP CHECK_C
+                      77     
+0063                  78     BNT_D:
+0063 C220             79         CLR FLAG_STOP
+0065 7800             80         MOV R0, #00H
+0067 80B0             81         SJMP TATDAN_LOOP
+                      82     
+0069                  83     DELAY_10MS:
+0069 7D14             84         MOV R5, #20      
+006B                  85     D1:
+006B 7EFA             86         MOV R6, #250     
+006D                  87     D2:
+006D DEFE             88         DJNZ R6, D2 ; 500
+006F DDFA             89         DJNZ R5, D1 
+0071 22               90         RET
+                      91     
+0072                  92     DELAY_VARIABLE:
+0072 AF32             93         MOV R7, T_DELAY
+0074                  94     DVAR:
+0074 120069           95         LCALL DELAY_10MS
+0077 DFFB             96         DJNZ R7, DVAR
+0079 22               97         RET
+                      98     
+                      99     END
+A51 MACRO ASSEMBLER  KT                                                                   12/06/2025 12:19:26 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BNT_C. . . . . . .  C ADDR   0053H   A   
+BNT_D. . . . . . .  C ADDR   0063H   A   
+CHECK_C. . . . . .  C ADDR   005EH   A   
+D1 . . . . . . . .  C ADDR   006BH   A   
+D2 . . . . . . . .  C ADDR   006DH   A   
+DEC_T. . . . . . .  C ADDR   0022H   A   
+DELAY_10MS . . . .  C ADDR   0069H   A   
+DELAY_VARIABLE . .  C ADDR   0072H   A   
+DVAR . . . . . . .  C ADDR   0074H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX0. . . . . . . .  B ADDR   00A8H.0 A   
+FLAG_STOP. . . . .  B ADDR   0024H.0 A   
+INC_T. . . . . . .  C ADDR   002FH   A   
+INT0_ISR . . . . .  C ADDR   0003H   A   
+IT0. . . . . . . .  B ADDR   0088H.0 A   
+LIMIT2 . . . . . .  C ADDR   0038H   A   
+LIMIT_T. . . . . .  C ADDR   002CH   A   
+MAIN . . . . . . .  C ADDR   0006H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SEGMENT_PORT . . .  D ADDR   0080H   A   
+SKIP_T . . . . . .  C ADDR   003AH   A   
+TATDAN_LOOP. . . .  C ADDR   0019H   A   
+T_DELAY. . . . . .  D ADDR   0032H   A   
+VALUE. . . . . . .  D ADDR   0030H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

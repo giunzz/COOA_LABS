@@ -1,0 +1,139 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/27/2025 00:56:58 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Digit 0 = dùng 74HC138 ? A2 A1 A0 = 000 ? Y0 = 0 ? digit0 sáng
+                       2     ;Digit 1 = dùng 74HC138 ? A2 A1 A0 = 001 ? Y1 = 0 ? digit1 sáng
+                       3     
+                       4     
+  0080                 5     SEGMENT_PORT EQU P0     
+  0030                 6     VALUE1        DATA 30H   
+  0031                 7     VALUE2        DATA 31H  
+  00A0                 8     LED_CTRL1     BIT P2.0 
+  00A1                 9     LED_CTRL2     BIT P2.1 
+                      10     
+  00A2                11     A0_SELECT     BIT P2.2      ; 74HC138 A0
+  00A3                12     A1_SELECT     BIT P2.3      ; 74HC138 A1
+  00A4                13     A2_SELECT     BIT P2.4      ; 74HC138 A2
+                      14     
+0000                  15     ORG 0000H
+0000 8000             16         SJMP MAIN
+                      17     
+0002                  18     MAIN:
+0002 753000           19         MOV VALUE1, #00H      ; start
+0005 753100           20         MOV VALUE2, #00H
+0008 D2A0             21             SETB LED_CTRL1 
+000A D2A1             22         SETB LED_CTRL2 
+                      23     
+                      24     
+                      25     
+000C                  26     MAIN_LOOP:
+000C 12002B           27         LCALL DISPLAY_2DIGIT
+000F 120054           28         LCALL DELAY1S
+0012 0530             29         INC VALUE1
+0014 E530             30         MOV A, VALUE1
+0016 B40403           31         CJNE A, #04H, V1_OK
+0019 753000           32         MOV VALUE1, #00H
+001C                  33     V1_OK:
+001C 0531             34         INC VALUE2
+001E E531             35         MOV A, VALUE2
+0020 B40403           36         CJNE A, #04H, V2_OK
+0023 753100           37         MOV VALUE2, #00H
+0026                  38     V2_OK:
+0026 120054           39         LCALL DELAY1S
+0029 80E1             40         SJMP MAIN_LOOP
+                      41     
+002B                  42     DISPLAY_2DIGIT:
+002B 90005C           43         MOV DPTR, #TABLE
+                      44         ; Display VALUE1 (digit 0)
+002E C2A2             45         CLR A0_SELECT
+0030 C2A3             46         CLR A1_SELECT
+0032 C2A4             47         CLR A2_SELECT
+0034 E530             48         MOV A, VALUE1
+0036 93               49         MOVC A, @A+DPTR      
+0037 F580             50         MOV SEGMENT_PORT, A  
+0039 12004B           51         LCALL DELAY_200MS
+                      52         ; Display VALUE2 (digit 1)
+003C D2A2             53         SETB A0_SELECT
+003E C2A3             54         CLR A1_SELECT
+0040 C2A4             55         CLR A2_SELECT
+0042 E531             56         MOV A, VALUE2
+0044 93               57         MOVC A, @A+DPTR      
+A51 MACRO ASSEMBLER  MAIN                                                                 11/27/2025 00:56:58 PAGE     2
+
+0045 F580             58         MOV SEGMENT_PORT, A  
+0047 12004B           59         LCALL DELAY_200MS
+                      60     
+004A 22               61         RET
+                      62         
+004B                  63     DELAY_200MS:
+004B 7AC8             64         MOV R2, #200
+004D                  65     D1:
+004D 79C8             66         MOV R1, #200
+004F                  67     D2:
+004F D9FE             68         DJNZ R1, D2
+0051 DAFA             69         DJNZ R2, D1
+0053 22               70         RET
+                      71     
+0054                  72     DELAY1S:
+0054 7B05             73         MOV R3, #5
+0056                  74     L1:
+0056 12004B           75         LCALL DELAY_200MS
+0059 DBFB             76         DJNZ R3, L1
+005B 22               77         RET
+                      78     
+                      79     
+005C                  80     TABLE:
+005C 3F               81         DB 03FH
+005D 06               82         DB 006H
+005E 5B               83         DB 05BH
+005F 4F               84         DB 04FH
+0060 66               85         DB 066H
+0061 6D               86         DB 06DH
+0062 7D               87         DB 07DH
+0063 07               88         DB 007H
+0064 7F               89         DB 07FH
+0065 6F               90         DB 06FH
+                      91     
+                      92     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/27/2025 00:56:58 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+A0_SELECT. . . . .  B ADDR   00A0H.2 A   
+A1_SELECT. . . . .  B ADDR   00A0H.3 A   
+A2_SELECT. . . . .  B ADDR   00A0H.4 A   
+D1 . . . . . . . .  C ADDR   004DH   A   
+D2 . . . . . . . .  C ADDR   004FH   A   
+DELAY1S. . . . . .  C ADDR   0054H   A   
+DELAY_200MS. . . .  C ADDR   004BH   A   
+DISPLAY_2DIGIT . .  C ADDR   002BH   A   
+L1 . . . . . . . .  C ADDR   0056H   A   
+LED_CTRL1. . . . .  B ADDR   00A0H.0 A   
+LED_CTRL2. . . . .  B ADDR   00A0H.1 A   
+MAIN . . . . . . .  C ADDR   0002H   A   
+MAIN_LOOP. . . . .  C ADDR   000CH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SEGMENT_PORT . . .  D ADDR   0080H   A   
+TABLE. . . . . . .  C ADDR   005CH   A   
+V1_OK. . . . . . .  C ADDR   001CH   A   
+V2_OK. . . . . . .  C ADDR   0026H   A   
+VALUE1 . . . . . .  D ADDR   0030H   A   
+VALUE2 . . . . . .  D ADDR   0031H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

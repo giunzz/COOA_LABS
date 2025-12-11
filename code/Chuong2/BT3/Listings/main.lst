@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 15:50:37 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H 
+0000 753005            2     MOV 30H, #05H     ; luu giá tr? 5 vào ô nh? RAM n?i t?i d?a ch? 30H
+                       3     
+0003 A930              4     MOV R1, 30H       ; n?p giá tr? 5 vào thanh ghi R1
+0005 7A00              5     MOV R2, #00H      ; R2 = 0 (dùng d? c?ng d?n)
+0007 E4                6     CLR A             ; A = 0 (Accumulator)
+                       7     
+0008                   8     LOOP:
+0008 E9                9     MOV A, R1         ; A = R1
+0009 2A               10     ADD A, R2         ; A = R1 + R2
+000A FA               11     MOV R2, A         ; c?p nh?t R2 = t?ng t?m
+000B D9FB             12     DJNZ R1, LOOP     ; gi?m R1, n?u ? 0 thì l?p l?i
+                      13     
+000D 8A40             14     MOV 40H, R2       ; luu t?ng vào RAM d?a ch? 40H
+000F 8A90             15     MOV P1, R2        ; xu?t t?ng ra Port 1
+0011 80FE             16     JMP $             ; vòng l?p vô h?n (d?ng chuong trình)
+                      17     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 15:50:37 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+LOOP . . . . . . .  C ADDR   0008H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

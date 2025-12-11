@@ -1,0 +1,44 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              11/26/2025 16:05:46 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          
+   3          void delay200ms() {
+   4   1          unsigned char R2, R1;
+   5   1          for(R2 = 100; R2 > 0; R2--) {
+   6   2              for(R1 = 100; R1 > 0; R1--) {
+   7   3              }
+   8   2          }
+   9   1      }
+  10          
+  11          void main()
+  12          {
+  13   1          while(1)
+  14   1          {
+  15   2              unsigned char base = 0xFF;   
+  16   2              unsigned char i, j, mask = 0xFF, plus;
+  17   2              for(i = 0; i < 8; i++)
+  18   2              {
+  19   3                  base = base >> 1;   
+  20   3                  plus = 1; 
+  21   3                  for (j = 8 - i ; j >= 0 , j--)
+*** ERROR C141 IN LINE 21 OF main.c: syntax error near ')', expected ';'
+  22   3                  {
+  23   4                      P2 = mask & ~plus;   
+  24   4                      plus = plus << 1;
+  25   4                      
+  26   4                      delay200ms();
+  27   4                  }
+  28   3                  mask = base;
+  29   3              }
+  30   2          }
+  31   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

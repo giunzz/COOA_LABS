@@ -1,0 +1,55 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 08:23:08 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; Gan 2 gia tri khong dau vao 2 thanh ghi R0, R1 . Tinh tong hieu tich va xuat ra port 0,1,
+                             2,3
+0000                   2     ORG 0000H 
+0000 780A              3     MOV R0, #0AH 
+0002 7905              4     MOV R1, #05H
+                       5     
+                       6     
+0004 E8                7     MOV A, R0 
+0005 29                8     ADD A, R1 
+0006 F580              9     MOV P0, A 
+                      10     
+                      11     
+0008 E8               12     MOV A, R0 
+0009 C3               13     CLR C 
+000A 99               14     SUBB A, R1 
+000B F590             15     MOV P1, A 
+                      16     
+                      17     
+000D E8               18     MOV A, R0 
+000E 89F0             19     MOV B, R1
+0010 A4               20     MUL AB 
+0011 F5A0             21     MOV P2, A 
+0013 85F0B0           22     MOV P3, B 
+                      23     
+0016 80FE             24     JMP $ 
+                      25     END 
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 08:23:08 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,70 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/19/2025 01:55:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+                       2     
+0000                   3     MAIN:
+0000 C290              4         CLR P1.0           ; LED OFF ban d?u
+                       5     
+0002                   6     LOOP:
+0002 B290              7         CPL P1.0           ; d?o tr?ng thái LED
+0004 120009            8         LCALL DELAY500MS   ; t?o tr? 500ms
+0007 80F9              9         SJMP LOOP
+                      10     
+                      11     
+                      12     ;===================================
+                      13     ; T?o tr? 500ms b?ng Timer1 Mode1
+                      14     ;===================================
+0009                  15     DELAY500MS:
+0009 7F0A             16         MOV R7,#10         ; 10 × 50ms = 500ms
+                      17     
+000B                  18     DELAY_LOOP:
+000B 758910           19         MOV TMOD,#10H      ; Timer1 Mode1 (16-bit)
+000E 758D3C           20         MOV TH1,#03CH      ; n?p 3CB0H
+0011 758BB0           21         MOV TL1,#0B0H
+                      22     
+0014 D28E             23         SETB TR1           ; b?t Timer1
+                      24     
+0016                  25     WAIT_T1:
+0016 308FFD           26         JNB TF1,WAIT_T1    ; ch? tràn
+                      27     
+0019 C28E             28         CLR TR1            ; t?t Timer1
+001B C28F             29         CLR TF1            ; xóa c? tràn
+                      30     
+001D DFEC             31         DJNZ R7,DELAY_LOOP ; l?p 10 l?n
+                      32     
+001F 22               33         RET
+                      34     
+                      35     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/19/2025 01:55:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY500MS . . . .  C ADDR   0009H   A   
+DELAY_LOOP . . . .  C ADDR   000BH   A   
+LOOP . . . . . . .  C ADDR   0002H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+TF1. . . . . . . .  B ADDR   0088H.7 A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+WAIT_T1. . . . . .  C ADDR   0016H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

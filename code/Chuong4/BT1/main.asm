@@ -1,0 +1,34 @@
+; 65536 - (1ms x 1MHz) = 65536 - 1000 = 64536 -> FC18
+ORG 0000H
+
+START:
+    SETB P1.0          
+    MOV R7, #100       ; 100 × 10ms = 1s
+D1: LCALL DELAY_10MS
+    DJNZ R7, D1
+
+    CLR P1.0           ; tat LED
+    MOV R7, #100
+D2: LCALL DELAY_10MS
+    DJNZ R7, D2
+
+    SJMP START
+
+DELAY_10MS:
+    MOV R6, #10
+L10: LCALL DELAY_1MS
+     DJNZ R6, L10
+     RET
+	 
+DELAY_1MS: 
+	MOV TMOD, #01H
+	MOV TH0, #0FCH 
+	MOV TL0, #018H
+	SETB TR0
+	WAIT:
+	 JNB TF0, WAIT
+	 CLR TR0
+	 CLR TF0
+	 RET
+END
+	 

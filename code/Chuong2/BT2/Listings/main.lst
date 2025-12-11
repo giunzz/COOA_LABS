@@ -1,0 +1,49 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 15:13:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 900100            2     MOV DPTR, #TABLE     
+0003 7400              3     MOV A, #00H          
+0005 93                4     MOVC A, @A+DPTR      
+0006 F8                5     MOV R0, A            
+                       6     
+0007 7401              7     MOV A, #01H          
+0009 93                8     MOVC A, @A+DPTR      
+000A F9                9     MOV R1, A            
+                      10     
+000B E8               11     MOV A, R0
+000C C3               12     CLR C                
+000D 99               13     SUBB A, R1           
+                      14     
+000E F590             15     MOV P1, A
+                      16     
+0010 80FE             17     JMP $            
+                      18             
+0100                  19     ORG 0100H 
+0100                  20     TABLE: 
+0100 0A03             21                     DB 0AH, 03H
+                      22     END 
+                                     
+A51 MACRO ASSEMBLER  MAIN                                                                 11/10/2025 15:13:09 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+P1 . . . . . . . .  D ADDR   0090H   A   
+TABLE. . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

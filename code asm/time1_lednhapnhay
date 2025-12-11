@@ -1,0 +1,65 @@
+SEGMENT_PORT EQU P0     
+VALUE        DATA 30H    
+SEC         DATA 31H 	
+
+ORG 0000H
+    SJMP MAIN
+ORG 001BH
+    LJMP TIMER1_ISR
+
+	
+MAIN:
+    MOV VALUE, #00H 
+	MOV SEC,   #00H 	
+	
+	MOV TMOD, #10H    ; 10ms     
+    MOV TH1, #0D8H        
+    MOV TL1, #0F0H	
+	
+	SETB ET1
+	SETB EA
+	SETB TR1 
+	
+	SETB P2.0
+
+	
+MAIN_LOOP:
+    SJMP MAIN_LOOP	
+	
+TIMER1_ISR: 
+    MOV TH1, #0D8H        
+    MOV TL1, #0F0H
+	
+	INC VALUE
+	MOV A, VALUE
+    CJNE A, #100, DISPLAY
+    MOV VALUE, #00H
+	
+	INC SEC 
+	MOV A, SEC
+    CJNE A, #4, DISPLAY
+	MOV SEC, #00H
+
+    CPL P2.0
+
+
+DISPLAY:
+    MOV DPTR, #TABLE
+    MOV A, SEC
+    MOVC A, @A+DPTR      
+    MOV SEGMENT_PORT, A  
+    RETI      
+
+TABLE:
+    DB 03FH
+    DB 006H
+    DB 05BH
+    DB 04FH
+    DB 066H
+    DB 06DH
+    DB 07DH
+    DB 007H
+    DB 07FH
+    DB 06FH
+
+END

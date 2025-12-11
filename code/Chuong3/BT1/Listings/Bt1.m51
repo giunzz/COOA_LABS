@@ -1,0 +1,107 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    11/18/2025  21:34:00  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\main.obj TO .\Objects\Bt1 PRINT (.\Listings\Bt1.m51) RAMSIZE (
+>> 256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\Bt1 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     003DH     UNIT         ?PR?MAIN?MAIN
+            CODE    083DH     001FH     UNIT         ?PR?DELAY200MS?MAIN
+            CODE    085CH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\Bt1 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?DELAY200MS?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\Bt1 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:083DH         PUBLIC        delay200ms
+  C:0800H         PUBLIC        main
+  -------         PROC          DELAY200MS
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  11/18/2025  21:34:00  PAGE 2
+
+
+  D:0007H         SYMBOL        R2
+  D:0006H         SYMBOL        R1
+  -------         ENDDO         
+  C:083DH         LINE#         3
+  C:083DH         LINE#         5
+  C:0849H         LINE#         6
+  C:0855H         LINE#         7
+  C:0858H         LINE#         8
+  C:085BH         LINE#         9
+  -------         ENDPROC       DELAY200MS
+  -------         PROC          MAIN
+  -------         DO            
+  D:0005H         SYMBOL        base
+  D:0003H         SYMBOL        mask
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         11
+  C:0800H         LINE#         12
+  C:0800H         LINE#         13
+  C:0802H         LINE#         17
+  C:0802H         LINE#         18
+  C:0802H         LINE#         20
+  C:080EH         LINE#         21
+  C:080EH         LINE#         22
+  C:0819H         LINE#         23
+  C:0825H         LINE#         24
+  C:0825H         LINE#         25
+  C:0834H         LINE#         26
+  C:0837H         LINE#         27
+  C:083AH         LINE#         28
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+*** WARNING L7: MODULE NAME NOT UNIQUE
+    MODULE:  .\Objects\main.obj (MAIN)
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 005CH BYTE ( 4%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=107
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,86 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/18/2025 23:27:26 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0080                 1     SEGMENT_PORT EQU P0
+  00A0                 2     SELECT_PORT EQU P2
+  0030                 3     LED7SEG DATA 30H
+  0031                 4     VALUE DATA 31H
+                       5     
+0000                   6     ORG 0000H
+0000 802E              7     JMP MAIN
+                       8     
+0030                   9     ORG 0030H
+0030                  10     MAIN:
+0030 753000           11             MOV LED7SEG, #0
+0033 753100           12             MOV VALUE, #0
+                      13             
+0036                  14     LOOP:
+0036 E530             15             MOV A, LED7SEG
+0038 23               16             RL A
+0039 23               17             RL A
+003A F5A0             18             MOV SELECT_PORT, A
+                      19             
+003C 90005D           20             MOV DPTR, #DIGIT_PATTERNS
+003F E531             21             MOV A, VALUE
+0041 93               22             MOVC A, @A+DPTR
+0042 F580             23             MOV SEGMENT_PORT, A
+0044 1154             24             CALL DELAY_2MS
+                      25             
+0046 0530             26             INC LED7SEG
+0048 5407             27             ANL A, #07H
+004A F530             28             MOV LED7SEG, A
+                      29             
+004C 0531             30             INC VALUE
+004E 5407             31             ANL A, #07H
+0050 F531             32             MOV VALUE, A
+                      33             
+0052 80E2             34             JMP LOOP
+                      35     
+0054                  36     DELAY_2MS:
+0054 7A04             37             MOV R2, #4
+0056                  38     D2_OUTER:
+0056 79FA             39             MOV R1, #250
+0058                  40     D2_INNER:
+0058 D9FE             41             DJNZ R1, D2_INNER
+005A DAFA             42             DJNZ R2, D2_OUTER
+005C 22               43             RET
+                      44             
+005D                  45     DIGIT_PATTERNS:
+005D 3F065B4F         46             DB 03Fh, 006h, 05Bh, 04Fh, 066h, 06Dh, 07Dh, 007h, 07Fh, 06Fh
+0061 666D7D07                
+0065 7F6F                    
+                      47             
+                      48     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/18/2025 23:27:26 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D2_INNER . . . . .  C ADDR   0058H   A   
+D2_OUTER . . . . .  C ADDR   0056H   A   
+DELAY_2MS. . . . .  C ADDR   0054H   A   
+DIGIT_PATTERNS . .  C ADDR   005DH   A   
+LED7SEG. . . . . .  D ADDR   0030H   A   
+LOOP . . . . . . .  C ADDR   0036H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SEGMENT_PORT . . .  D ADDR   0080H   A   
+SELECT_PORT. . . .  D ADDR   00A0H   A   
+VALUE. . . . . . .  D ADDR   0031H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,50 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/06/2025 16:03:03 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+  0091                 1             LED1 EQU P1.1
+0000                   2             ORG 00H 
+0000 D291              3             SETB LED1 
+0002                   4     LOOP: 
+0002 B291              5             CPL LED1 
+0004 1108              6             CALL DELAY200ms 
+0006 80FA              7             JMP LOOP 
+0008                   8     DELAY200ms:
+0008 79C8              9                     MOV R1, #200
+000A                  10     LAP2: 
+000A 79C8             11                     MOV R1, #200 
+000C                  12     LAP1: 
+000C 00               13                     NOP 
+000D 00               14                     NOP
+000E 00               15                     NOP
+000F D9FB             16                     DJNZ R1, LAP1
+0011 DAF7             17                     DJNZ R2, LAP2
+0013 22               18                     RET 
+                      19                     END
+                                             
+A51 MACRO ASSEMBLER  MAIN                                                                 11/06/2025 16:03:03 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY200MS . . . .  C ADDR   0008H   A   
+LAP1 . . . . . . .  C ADDR   000CH   A   
+LAP2 . . . . . . .  C ADDR   000AH   A   
+LED1 . . . . . . .  B ADDR   0090H.1 A   
+LOOP . . . . . . .  C ADDR   0002H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

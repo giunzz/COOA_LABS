@@ -1,0 +1,35 @@
+ORG 0000H
+
+BEGIN_ENTRY:
+    MOV A, #0FFH     ; 0000 0000   
+
+MAIN_LOOP:
+    MOV P2, A        
+    LCALL DELAY200ms
+	
+    RL A
+	ANL A, #0FEH
+	
+    CJNE A, #00H, CONT 
+	MOV P2, #00H
+    LCALL DELAY200ms
+	MOV A, #0FFH 
+	
+
+CONT:
+    SJMP MAIN_LOOP
+
+
+DELAY200ms:
+    MOV R2, #200
+L2:
+    MOV R1, #200
+L1_1:
+    NOP
+    NOP
+    NOP
+    DJNZ R1, L1_1
+    DJNZ R2, L2
+    RET
+
+END

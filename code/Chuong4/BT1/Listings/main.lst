@@ -1,0 +1,71 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/13/2025 16:27:35 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; 65536 - (1ms x 1MHz) = 65536 - 1000 = 64536 -> FC18
+0000                   2     ORG 0000H
+                       3     
+0000                   4     START:
+0000 D290              5         SETB P1.0          
+0002 7F64              6         MOV R7, #100       ; 100 × 10ms = 1s
+0004 120014            7     D1: LCALL DELAY_10MS
+0007 DFFB              8         DJNZ R7, D1
+                       9     
+0009 C290             10         CLR P1.0           ; tat LED
+000B 7F64             11         MOV R7, #100
+000D 120014           12     D2: LCALL DELAY_10MS
+0010 DFFB             13         DJNZ R7, D2
+                      14     
+0012 80EC             15         SJMP START
+                      16     
+0014                  17     DELAY_10MS:
+0014 7E0A             18         MOV R6, #10
+0016 12001C           19     L10: LCALL DELAY_1MS
+0019 DEFB             20          DJNZ R6, L10
+001B 22               21          RET
+                      22              
+001C                  23     DELAY_1MS: 
+001C 758901           24             MOV TMOD, #01H
+001F 758CFC           25             MOV TH0, #0FCH 
+0022 758A18           26             MOV TL0, #018H
+0025 D28C             27             SETB TR0
+0027                  28             WAIT:
+0027 308DFD           29              JNB TF0, WAIT
+002A C28C             30              CLR TR0
+002C C28D             31              CLR TF0
+002E 22               32              RET
+                      33     END
+                                      
+A51 MACRO ASSEMBLER  MAIN                                                                 11/13/2025 16:27:35 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D1 . . . . . . . .  C ADDR   0004H   A   
+D2 . . . . . . . .  C ADDR   000DH   A   
+DELAY_10MS . . . .  C ADDR   0014H   A   
+DELAY_1MS. . . . .  C ADDR   001CH   A   
+L10. . . . . . . .  C ADDR   0016H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+START. . . . . . .  C ADDR   0000H   A   
+TF0. . . . . . . .  B ADDR   0088H.5 A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+WAIT . . . . . . .  C ADDR   0027H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

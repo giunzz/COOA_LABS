@@ -1,0 +1,21 @@
+DELAY1S:
+    MOV R3, #5
+S1BACK:
+    LCALL DELAY200ms
+    DJNZ R3, S1BACK
+    RET
+
+DELAY200ms:
+    MOV R2, #200
+
+LAP2:
+    MOV R1, #200
+LAP1:
+    NOP
+    NOP
+    NOP
+    DJNZ R1, LAP1
+    DJNZ R2, LAP2
+    RET
+
+END

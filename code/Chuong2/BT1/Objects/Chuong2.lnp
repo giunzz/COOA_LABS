@@ -1,0 +1,4 @@
+".\Objects\STARTUP.obj",
+".\Objects\main.obj" 
+TO ".\Objects\Chuong2" 
+PRINT(".\Listings\Chuong2.m51") RAMSIZE(256) 

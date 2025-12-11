@@ -1,0 +1,92 @@
+;Digit 0 = dùng 74HC138 → A2 A1 A0 = 000 → Y0 = 0 → digit0 sáng
+;Digit 1 = dùng 74HC138 → A2 A1 A0 = 001 → Y1 = 0 → digit1 sáng
+
+
+SEGMENT_PORT EQU P0     
+VALUE1        DATA 30H   
+VALUE2        DATA 31H  
+LED_CTRL1     BIT P2.0 
+LED_CTRL2     BIT P2.1 
+
+A0_SELECT     BIT P2.2      ; 74HC138 A0
+A1_SELECT     BIT P2.3      ; 74HC138 A1
+A2_SELECT     BIT P2.4      ; 74HC138 A2
+
+ORG 0000H
+    SJMP MAIN
+
+MAIN:
+    MOV VALUE1, #00H      ; start
+    MOV VALUE2, #00H
+	SETB LED_CTRL1 
+    SETB LED_CTRL2 
+
+
+
+MAIN_LOOP:
+    LCALL DISPLAY_2DIGIT
+    LCALL DELAY1S
+    INC VALUE1
+    MOV A, VALUE1
+    CJNE A, #04H, V1_OK
+    MOV VALUE1, #00H
+V1_OK:
+    INC VALUE2
+    MOV A, VALUE2
+    CJNE A, #04H, V2_OK
+    MOV VALUE2, #00H
+V2_OK:
+    LCALL DELAY1S
+    SJMP MAIN_LOOP
+
+DISPLAY_2DIGIT:
+    MOV DPTR, #TABLE
+    ; Display VALUE1 (digit 0)
+    CLR A0_SELECT
+    CLR A1_SELECT
+    CLR A2_SELECT
+    MOV A, VALUE1
+    MOVC A, @A+DPTR      
+    MOV SEGMENT_PORT, A  
+    LCALL DELAY_200MS
+    ; Display VALUE2 (digit 1)
+    SETB A0_SELECT
+    CLR A1_SELECT
+    CLR A2_SELECT
+    MOV A, VALUE2
+    MOVC A, @A+DPTR      
+    MOV SEGMENT_PORT, A  
+    LCALL DELAY_200MS
+
+    RET
+    
+DELAY_200MS:
+    MOV R2, #200
+D1:
+    MOV R1, #200
+D2:
+    DJNZ R1, D2
+    DJNZ R2, D1
+    RET
+
+DELAY1S:
+    MOV R3, #5
+L1:
+    LCALL DELAY_200MS
+    DJNZ R3, L1
+    RET
+
+
+TABLE:
+    DB 03FH
+    DB 006H
+    DB 05BH
+    DB 04FH
+    DB 066H
+    DB 06DH
+    DB 07DH
+    DB 007H
+    DB 07FH
+    DB 06FH
+
+END

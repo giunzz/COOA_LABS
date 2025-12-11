@@ -1,0 +1,89 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/02/2025  22:09:11  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\main.obj TO .\Objects\kt_asm PRINT (.\Listings\kt_asm.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\kt_asm (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     0020H     UNIT         ?PR?_DELAY?MAIN
+            CODE    0820H     0012H     UNIT         ?PR?MAIN?MAIN
+            CODE    0832H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\kt_asm (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_DELAY?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\kt_asm (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:0800H         PUBLIC        _delay
+  C:0820H         PUBLIC        main
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        time
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/02/2025  22:09:11  PAGE 2
+
+
+  D:0004H         SYMBOL        i
+  D:0002H         SYMBOL        j
+  -------         ENDDO         
+  C:0800H         LINE#         3
+  C:0800H         LINE#         5
+  C:080AH         LINE#         6
+  C:081FH         LINE#         7
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  C:0820H         LINE#         8
+  C:0820H         LINE#         9
+  C:0820H         LINE#         10
+  C:0823H         LINE#         11
+  C:082AH         LINE#         12
+  C:082DH         LINE#         13
+  C:0830H         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0032H BYTE ( 2%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=65
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

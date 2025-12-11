@@ -1,0 +1,21 @@
+ORG 0000H 
+MOV R0, #0AH 
+MOV R1, #05H
+
+MOV A, R0 
+ADD A, R1 
+MOV P0, A 
+
+MOV A, R0 
+CLR C 
+SUBB A, R1 
+MOV P1, A 
+
+MOV A, R0 
+MOV B, R1
+MUL AB 
+MOV P2, A 
+MOV P3, B 
+
+JMP $ 
+END 

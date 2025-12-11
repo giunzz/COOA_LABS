@@ -1,0 +1,78 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 11/11/2025 17:25:59 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\main.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE main.asm SET(SMALL) DEBUG PRINT(.\Listings\main.lst) OBJECT(.\Objects\m
+                      ain.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;===========================================================
+                       2     ; Program: Write pattern to external RAM and display on P1
+                       3     ; MCU: 8051 (12 MHz)
+                       4     ;===========================================================
+                       5     
+0000                   6     ORG 0000H        
+                       7     
+0000                   8     MAIN:            
+0000 907FFA            9         MOV DPTR, #07FFAH    ; B?t d?u vùng RAM ngoài
+0003 7B08             10         MOV R3, #08H          ; 8 bytes d? li?u
+0005 7401             11         MOV A, #01H           ; D? li?u kh?i d?u = 01H
+                      12     
+                      13     ;--- Ghi d? li?u m?u vào RAM ---
+0007                  14     REP1:
+0007 F0               15         MOVX @DPTR, A         ; Ghi A -> RAM ngoài
+0008 23               16         RL A                  ; Xoay trái (tang giá tr?)
+0009 A3               17         INC DPTR              ; Tang d?a ch? RAM
+000A DBFB             18         DJNZ R3, REP1         ; L?p 8 l?n
+                      19     
+                      20     ;--- Ð?c d? li?u t? RAM và xu?t ra PORT1 ---
+000C 907FFA           21         MOV DPTR, #07FFAH     ; Ð?c l?i t? d?u RAM
+000F 7B08             22         MOV R3, #08H
+                      23     
+0011                  24     REP2:
+0011 E0               25         MOVX A, @DPTR         ; Ð?c t? RAM
+0012 F590             26         MOV P1, A             ; Xu?t ra PORT1
+0014 12001C           27         LCALL DELAY           ; G?i chuong trình tr?
+0017 A3               28         INC DPTR
+0018 DBF7             29         DJNZ R3, REP2
+                      30     
+001A 80E4             31         SJMP MAIN             ; Quay l?i vòng chính
+                      32     
+                      33     ;===========================================================
+                      34     ; CHUONG TRÌNH CON DELAY ~120ms @12MHz
+                      35     ;===========================================================
+                      36     
+001C                  37     DELAY:
+001C 79C8             38         MOV R1, #200          ; Vòng l?p ngoài
+001E                  39     LAP1:
+001E 78C8             40         MOV R0, #200          ; Vòng l?p trong
+0020                  41     LAP:
+0020 00               42         NOP                   ; Tr? nh?
+0021 D8FD             43         DJNZ R0, LAP
+0023 D9F9             44         DJNZ R1, LAP1
+0025 22               45         RET
+                      46     
+                      47     END
+A51 MACRO ASSEMBLER  MAIN                                                                 11/11/2025 17:25:59 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DELAY. . . . . . .  C ADDR   001CH   A   
+LAP. . . . . . . .  C ADDR   0020H   A   
+LAP1 . . . . . . .  C ADDR   001EH   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REP1 . . . . . . .  C ADDR   0007H   A   
+REP2 . . . . . . .  C ADDR   0011H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

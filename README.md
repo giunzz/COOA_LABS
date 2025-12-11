@@ -1,93 +1,99 @@
-# THỰC TẬP KIẾN TRÚC VÀ TỔ CHỨC MÁY TÍNH 
+# THỰC TẬP KIẾN TRÚC VÀ TỔ CHỨC MÁY TÍNH – 8051
 
-### 1. MÔ TẢ
-- Link tải KeilC(AT89C51) và Proteus: 
-https://drive.google.com/drive/folders/1FDUzu3VYYfmMQK9li1eveh-XFw6xOYeM?usp=sharing
+## 1. Giới thiệu
 
-- Lập trình 8051 (ams và C)
+- Link tải KeilC (AT89C51) và Proteus:  
+  [KeilC & Proteus](https://drive.google.com/drive/folders/1FDUzu3VYYfmMQK9li1eveh-XFw6xOYeM?usp=sharing)
 
-- Sử dụng kit: https://github.com/giunzz/COOA_LABS/blob/main/proteus/kitTT_ver8.17.pdsprj 
- * Chú ý: chân LED đơn P1, LED7seg: P2,P0
- * Uart P3.0, P3.1, ngắt INT0 P3.2 , INT1 P3.3
+- Lập trình vi điều khiển 8051 bằng ASM và C.
 
-- Bảng chuyển đổi cơ số 
+- Kit thực hành Proteus:  
+  [KitTT_ver8.17](https://github.com/giunzz/COOA_LABS/blob/main/proteus/kitTT_ver8.17.pdsprj)
 
-### 2. BÁO CÁO 
+  Lưu ý sử dụng chân:
+  - LED đơn: **P1**
+  - LED 7 đoạn: **P2, P0**
+  - UART: **P3.0, P3.1**
+  - Ngắt ngoài: **INT0 (P3.2), INT1 (P3.3)**
 
-#### Tuần 1: ASM
-- Tổng quan về dòng 8051 (VDK:89S52)
+---
 
-– Tập lệnh ASM của 8051
-You can view my full report here: Report (PDF)[]
+## 2. Báo cáo từng tuần
 
-#### Tuần 2: ASM
+### Tuần 1 – ASM  
+- Tổng quan 8051, tập lệnh ASM  
+  [Report01](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN1.docx)
 
-- Nhập xuất GPIO
+### Tuần 2 – ASM  
+- Nhập xuất GPIO, Timer – Counter  
+  [Report02](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN2.docx)
 
-- Timer - Counter
+### Tuần 3 – ASM  
+- Ngắt (Interrupt)  
+  [Report03](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN3.docx)
 
-You can view my full report here: Report (PDF)
+### Tuần 4 – C  
+- Lập trình GPIO bằng ngôn ngữ C  
+  [Report04](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN4.docx)
 
+### Tuần 5 – C  
+- Lập trình LED 7 đoạn  
+  [Report05](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN5.docx)
 
+### Tuần 6 – C  
+- Timer/Counter, UART  
+  [Report06](https://github.com/giunzz/COOA_LABS/blob/main/report/HOANGNGOCDUNG_TUAN6.docx)
 
-#### Tuần 3: ASM
+---
 
-- Ngắt 
-- Interrupt 
+## 3. Kiểm tra ASM
 
-You can view my full report here: Report (PDF)
+**Yêu cầu chương trình:**
 
-#### Tuần 4: 
-- Lập trình GPIO sử dụng ngôn ngữ C
+1. LED chạy tắt dần từ phải → trái, có trạng thái sáng hết (T mặc định = 1000ms).  
+2. Nút A: T = T + 500ms (tối đa 3s).  
+3. Nút B: T = T – 500ms (tối thiểu 500ms).  
+4. Nút C: LED sáng hết và đứng im. Nút D: chạy lại chế độ 1.  
+5. LED 7 đoạn hiển thị số LED sáng và tốc độ hiện tại.
 
-You can view my full report here: Report (PDF)
+Code ASM kiểm tra:  
+[Midterm ASM](https://github.com/giunzz/COOA_LABS/tree/main/midterm_asm)
 
-#### Tuần 5: 
-- Lập trình LED 7 SEG
+---
 
-You can view my full report here: Report (PDF)
+## 4. Kiểm tra C – Lần 1
 
-#### Tuần 6: 
-- Timer/Counter (C)
+**Đề bài:**
 
-- Lập trình UART
-You can view my full report here: Report (PDF)
+- 3 chế độ LED:  
+  1) sáng dần trái→phải ×8  
+  2) tắt dần phải→trái ×8  
+  3) nháy ×8  
+- 1 nút chuyển mode:  
+  - mode 0: lặp cả 3  
+  - mode 1/2/3: chạy từng chế độ riêng  
+- LED 7 đoạn hiển thị mode và số LED sáng  
 
-#### KIỂM TRA ASM: 
+Code:  
+[KT C – Lần 1](https://github.com/giunzz/COOA_LABS/blob/main/code_c/kt2.c)
 
-Đề bài: Viết duy nhất 1 chương trình hoàn chỉnh, với các yêu cầu sau:
+---
 
-Cho 4 led tắt dần từ phải sang trái, rồi lặp lại. Có trạng thái “Sáng hết”. Tốc độ T ms (mặc định T = 1000 ms).
+## 5. Kiểm tra C – Lần 2
 
-    1. Nhấn nút A, T = T + 500 ms (tối đa 3 s).
+**Đề bài:**
 
-    2. Nhấn nút B, T = T – 500 ms (tối thiểu 500 ms).
+- LED chớp 100ms  
+- Button 1: bật LED trong T giây (T = 1 → trở lại ban đầu)  
+- Button 2: T = T + 0.5 (giới hạn 0.5 → 2.0s)  
+- LED 7 đoạn hiển thị T (ms)
 
-    3. Nhấn nút C, Led sáng hết rồi đứng im. Nhấn nút D, Led chạy lại như yêu cầu 1.
+Code:  
+[KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT3.c)
 
-    4. Led 7 đoạn: hiển thị số led đang sáng (2–3–4), hiển thị tốc độ đếm hiện tại.
+---
 
-You can view my code: 
-#### KIỂM TRA C LẦN 1: 
-Đề bài: 
-3 chế độ led:
-    sáng dần trái phải x8
-    tắt dần phải trái x8
-    nháy x8
-1 nút chuyển chế độ:
-mode 0: lặp lại 3 cái liên tục
-mode 1,2,3: cho từng chế độ riêng
-2 led 7 đoạn hiển thị mode và số led sáng
-You can view my code: 
+## 6. Tổng hợp Code
 
-#### KIỂM TRA C LẦN 2: 
-Đề bài: // 1 Led blink 100ms 
-// Button 1 : Bật sáng trong T s -> quay về ban đầu (T = 1)
-// Button 2: Cấu hình T = T + 0,5 (T = 0,5 -> 2s)
-// Hiển thị T lên led7seg (ms)
-You can view my code: 
-#### Overview: 
-Code C & ASM: 
-
-
-
+Tổng hợp toàn bộ code ASM & C:  
+[Overview](https://github.com/giunzz/COOA_LABS/tree/main/Overview)

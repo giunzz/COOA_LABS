@@ -101,25 +101,51 @@ unsigned char pattern_led[] = {
 };
 void effect_sangdan()
 {
-    unsigned char i;
-    for(i=0;i<9;i++){
-        P1 = pattern_led[i];
-				display_digit(5,period/1000,0);
-        delay_ms(period);
+    unsigned char sangdan_i;
+    if (ms_tick >= period)
+    {
+        ms_tick = 0;
+				display_digit(5, sangdan_i, 0);
+        P1 = pattern_led[sangdan_i++];
+        if (sangdan_i >= 9)
+            sangdan_i = 0;
+				
     }
 }
+
+
+unsigned char blink_step = 0;   
+bit blink_on = 0; 
+
 void effect_choptat()
 {
-    unsigned char i;
-    for(i=0;i<8;i++){
-        P1 = 0x00;
-        display_digit(5,period/1000,0);
-        delay_ms(period);
+	if (ms_tick >= period)
+    {
+        ms_tick = 0;
 
-        P1 = 0xFF;
-        delay_ms(period);
+        if (blink_on == 0)
+        {
+            P1 = 0x00;          // LED OFF
+            blink_on = 1;
+						display_digit(5, 0, 0);
+        }
+        else
+        {
+            P1 = 0xFF;          // LED ON
+            blink_on = 0;
+            blink_step++;    
+						display_digit(5, 8, 0);
+        }
+				
+
+        if (blink_step >= 8)
+        {
+            blink_step = 0;
+            blink_on = 0;
+        }
     }
 }
+
 
 
 void UART_Init(void) {
@@ -160,6 +186,9 @@ void Process_Command(void)
     else if(cmd[0] == '0' && cmd[1] == '2')
     {
         mode = MODE_BLINK;
+				blink_step = 0;
+				blink_on = 0;
+				ms_tick = 0;
         UART_SendString("\r\nMODE 02: BLINK 8 LAN\r\n");
     }
     else
@@ -169,20 +198,20 @@ void Process_Command(void)
 }
 
 
-void UART_Receive_Handler(void)
+void UART_Receive_Handler()
 {
-    if(RI)
+    if (RI)
     {
         RI = 0;
-        cmd[uart_index] = SBUF;   
-        uart_index++;
-        if(uart_index >= 2)
+        cmd[uart_index++] = SBUF;
+        if (uart_index >= 2)
         {
-            Process_Command();     
-            uart_index = 0;        
+            Process_Command();
+            uart_index = 0;
         }
     }
 }
+
 
 
 unsigned int remain_s;
@@ -195,7 +224,6 @@ void main(void)
     EX0 = 1;   
     EX1 = 1;   
     EA  = 1;  
-    EA = 1;
     timer0_init();
 		UART_Init();
 		UART_SendString("\r\n=== DIEU KHIEN LED QUA UART ===\r\n");

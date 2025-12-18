@@ -74,6 +74,20 @@ Code:  [KT C – Lần 1](https://github.com/giunzz/COOA_LABS/blob/main/code_c/k
 
 Code:  [KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT3.c)
 
+
+## 5. Kiểm tra C – Lần 2
+1. Hiện trạng thái 3 tải: Đèn, quạt, máy lạnh lên Terminal (Mặc định: OFF)
+(Cập nhật mới khi có thay đổi)
+
+2. Bật/tắt 3 tải bằng 3 nút nhấn đơn (Nhấn giữ nút không quá ~ 200ms)
+
+3. 1 led báo nguồn, chớp tắt chu kỳ 2s (sáng 1s / tắt 1s)
+
+- Thời gian chớp tắt hiển thị Led 7seg (đơn vị ms)
+- Đổi chu kỳ bằng cách gửi số ms từ Terminal.
+
+Code:  [KT C – Lần 3](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT4.c)
+
 ---
 
 ## 6. Ôn tập 

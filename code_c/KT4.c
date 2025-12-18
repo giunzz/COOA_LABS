@@ -182,8 +182,8 @@ void main(void)
 				UART_Receive_Handler();
 				if(state_timer >= period1/10)
 				{
-						 LED1 = ~LED1;
-						 state_timer = 0;
+						LED1 = ~LED1;
+						state_timer = 0;
 				}
 						remain_s = period1;
 						display_digit(0,remain_s%10,0);

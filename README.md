@@ -88,6 +88,15 @@ Code:  [KT C – Lần 2](https://github.com/giunzz/COOA_LABS/blob/main/code_c/K
 
 Code:  [KT C – Lần 3](https://github.com/giunzz/COOA_LABS/blob/main/code_c/KT4.c)
 
+### 7. Thi cuối kì - Lập trình C
+1. Dùng 2 nút nhấn → Bật/tắt 3 led đơn. (4đ) (2đ – không hoàn hảo) 
+a. Led thứ 3 sẽ sáng khi cả 2 led cùng sáng. 
+2. Gửi 1 mã (vd: “1on2off3on”) từ Terminal → Bật/tắt 3 led đơn ở trên. (2đ) 
+3. Hiện 4 số x000 → x111 lên led7seg[2:0] (tương ứng trạng thái 3 led) (2đ) 
+a. x là bằng 1 khi chỉ cần 1 led sáng, bằng 0 khi tất cả led đều tắt. 
+4. Gửi mã từ Terminal (2đ) 
+a. M0: Tắt hết các led. Và không cho điều khiển 3 led đơn. (Gửi lại thì cho phép) 
+a. M1_x: led nào được bật, thì sáng trong xms rồi sẽ tự tắt.
 ---
 
 ## 6. Ôn tập 

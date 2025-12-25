@@ -134,7 +134,7 @@ unsigned int state_timer = 0;
 unsigned int remain_s;
 void small_delay()
 {
-    unsigned int i;
+    
     for(i = 0; i < 200; i++);
 }
 void Process_CK(void)

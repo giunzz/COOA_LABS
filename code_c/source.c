@@ -90,7 +90,7 @@ void Process_CK(void)
 		}
 		if (cmd[0] == 'M' && cmd[1] == '1')
 		{
-			PERIOD =(cmd[3]-'0') * 1000 + (cmd[4]-'0')*100 + (cmd[5]-'0') * 10 + (cmd[6]-'0');
+			PERIOD =(cmd[2]-'0') * 1000 + (cmd[3]-'0')*100 + (cmd[4]-'0') * 10 + (cmd[5]-'0');
 			if (LED1 == 0) delay_ms(PERIOD);
 			LED1 = 1;
 			if (LED2 == 0) delay_ms(PERIOD);
@@ -101,17 +101,21 @@ void Process_CK(void)
 		if (cmd[0] == 'M' && cmd[1] == '0')
 		{
 			LED1 = LED2 = LED3 = 1;
-			if (state == 0) 
+			if (state == 1) 
 			{
-				LED1 = LED2 = LED3 = 1;
-				EX0 = 0;   
-				EX1 = 0;   
-			}
-			else 
-			{ 
-				LED1 = LED2 = LED3 = 1;
+				IT0 = 1;   
+				IT1 = 1;  
 				EX0 = 1;   
 				EX1 = 1;   
+				EA  = 1;
+			}
+			else 
+			{
+				IT0 = 0;   
+				IT1 = 0;  
+				EX0 = 0;   
+				EX1 = 0;   
+				EA  = 0;
 			}
 		}
 		UART_SendString("\r\nSet OK\r\n");
@@ -128,9 +132,9 @@ void UART_Receive_Handler(void)
 				
 				if (c == '\r' || c == '\n')
 				{
-					 if (cmd[0] == 'M' && cmd[1] == '0') state = ~state;
 					 Process_CK();  
-					 uart_index = 0; 
+           uart_index = 0; 
+					 if (cmd[0] == 'M' && cmd[1] == '0') state = ~state;
 				}
 				else 
 				{

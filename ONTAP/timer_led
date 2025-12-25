@@ -1,0 +1,86 @@
+/* 
+2 LED đơn
+
+LED1: chu kỳ 2s (ON 1s – OFF 1s)
+
+LED2: chu kỳ 1s (ON 0.5s – OFF 0.5s)
+
+Timer interrupt tạo tick 10ms
+
+Chu kỳ tạo bằng đếm tick
+
+Thạch anh 11.0592 MHz
+Dùng Timer0 – Mode 1 (16 bit)
+Chu kyf masy 1,085ms 
+-> 
+65536 - 9216 = 56320 = 0xDC00
+TH0 = 0xDC
+TL0 = 0x00
+*/
+
+
+#include <REGX51.H>
+#include <stdio.h>
+#define SEGMENT_PORT P0  
+#define SELECT_PORT  P2  
+
+sbit LED1 = P1^0;
+sbit LED2 = P1^7;
+
+volatile unsigned int tick_10ms = 0;
+volatile unsigned int cnt_led1 = 0;
+volatile unsigned int cnt_led2 = 0;
+
+/* Chu ky tính theo tick 10ms */
+#define LED1_PERIOD   200    // 2s  = 200 x 10ms
+#define LED2_PERIOD   100    // 1s  = 100 x 10ms
+
+#define LED1_HALF     100    // 1s
+#define LED2_HALF     50     // 0.5s
+
+/* timer 0 cho led */
+
+void Timer0_ISR(void) interrupt 1
+{
+    TH0 = 0xDC;
+    TL0 = 0x00;
+
+    tick_10ms++;
+
+    cnt_led1++;
+    if (cnt_led1 == LED1_HALF)
+		{
+        LED1 = ~LED1;     
+				cnt_led1 = 0;
+		}
+    
+    cnt_led2++;
+    if (cnt_led2 == LED2_HALF)
+		{
+        LED2 = ~LED2;          
+				cnt_led2 = 0;
+    }
+}
+
+void Timer0_Init(void)
+{
+    TMOD &= 0xF0;
+    TMOD |= 0x01;         
+
+    TH0 = 0xDC;
+    TL0 = 0x00;
+
+    ET0 = 1;               
+    EA  = 1;               
+    TR0 = 1;               
+}
+void main(void)
+{
+    LED1 = 1;   
+    LED2 = 1;
+
+    Timer0_Init();
+
+    while (1) {
+    }
+}

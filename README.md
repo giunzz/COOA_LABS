@@ -98,6 +98,7 @@ a. x là bằng 1 khi chỉ cần 1 led sáng, bằng 0 khi tất cả led đề
 a. M0: Tắt hết các led. Và không cho điều khiển 3 led đơn. (Gửi lại thì cho phép) 
 a. M1_x: led nào được bật, thì sáng trong xms rồi sẽ tự tắt.
 ---
+Code: [KT CK- C](https://github.com/giunzz/COOA_LABS/blob/main/code_c/source.c)
 
 ## 6. Ôn tập 
 
